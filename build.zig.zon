@@ -1,0 +1,20 @@
+.{
+    .name = "roguelike",
+    .version = "0.0.1",
+    .dependencies = .{
+        .raylib = .{
+            .url = "https://github.com/raysan5/raylib/archive/52f2a10db610d0e9f619fd7c521db08a876547d0.tar.gz",
+            .hash = "1220761aef32a253042bf79d5acc4c2013853f4db5a9a9f68cd341ee4ddb9099803a", // master
+        },
+        .@"raylib-cpp" = .{
+            .url = "https://github.com/RobLoach/raylib-cpp/archive/refs/tags/v5.0.2.tar.gz",
+            .hash = "12200de71a671fc3b2155475bc6691c51ac1ce81f4910fb0db9cad579a1047877108",
+        },
+        .googletest = .{
+            .url = "https://github.com/google/googletest/archive/refs/heads/main.zip",
+            .hash = "122098d850ec2ed23b11c196d9a3d8f16d7617cf5a0ee47379399334fbcfb8d9d913",
+        },
+    },
+
+    .paths = .{"build.zig"},
+}
