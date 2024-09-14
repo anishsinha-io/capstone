@@ -3,7 +3,7 @@
     .version = "0.0.1",
     .dependencies = .{
         .raylib = .{
-            .url = "https://github.com/raysan5/raylib/archive/refs/heads/master.zip",
+            .url = "https://github.com/anishsinha-io/raylib/archive/refs/heads/master.zip",
             .hash = "1220761aef32a253042bf79d5acc4c2013853f4db5a9a9f68cd341ee4ddb9099803a", // master
         },
         .@"raylib-cpp" = .{
