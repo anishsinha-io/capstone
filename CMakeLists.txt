@@ -6,6 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/resources")
+set(RESOURCES_OUTPUT_DIR "${CMAKE_BINARY_DIR}/resources")
+
+add_custom_target(copy_resources ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${RESOURCES_DIR}" "${RESOURCES_OUTPUT_DIR}"
+    COMMENT "Copying resources to the build directory..."
+)
+
+
 # Dependencies
 set(RAYLIB_VERSION 5.0)
 find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
@@ -15,6 +24,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
     raylib
     DOWNLOAD_EXTRACT_TIMESTAMP OFF
     URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+    # DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
@@ -33,6 +43,7 @@ FetchContent_MakeAvailable(raylib-cpp)
 
 FetchContent_Declare(
   googletest
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF
   URL https://github.com/google/googletest/archive/refs/heads/main.zip
   # URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
@@ -43,7 +54,7 @@ FetchContent_MakeAvailable(googletest)
 # Our Project
 
 set(SRCS
-    src/game.cc
+    src/game.cc src/player.cc
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -86,6 +97,8 @@ target_link_libraries(
   GTest::gtest_main
   gmock_main
 )
+
+add_dependencies(${PROJECT_NAME} copy_resources)
 
 include(GoogleTest)
 gtest_discover_tests(main_test)
