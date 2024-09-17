@@ -4,7 +4,7 @@
     .dependencies = .{
         .raylib = .{
             .url = "https://github.com/raysan5/raylib/archive/refs/heads/master.zip",
-            .hash = "1220761aef32a253042bf79d5acc4c2013853f4db5a9a9f68cd341ee4ddb9099803a", // master
+            .hash = "1220935399d91ba91765facad795b914f5dc270e0fca678405a6b81a6c2b55595f98", // master
         },
         .@"raylib-cpp" = .{
             .url = "https://github.com/RobLoach/raylib-cpp/archive/refs/tags/v5.0.2.tar.gz",
