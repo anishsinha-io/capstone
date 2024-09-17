@@ -23,3 +23,7 @@ Check your zig version. It should be `0.13.0`.
 Now, in this directory, you can run `zig build` to build the project and dump the headers in `/zig-out/include`. To run the application manually, run the file `/zig-out/bin/roguelike`.
 
 To build and run in the same step, type `zig build run` in your terminal.
+
+# License
+
+The source code is governed by the MIT License. However, this does not include anything under the resources directory, which contains art, assets, sprites, etc. These are not governed by an open source license and are property of Anish Sinha.
