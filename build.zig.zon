@@ -11,8 +11,8 @@
             .hash = "12200de71a671fc3b2155475bc6691c51ac1ce81f4910fb0db9cad579a1047877108",
         },
         .googletest = .{
-            .url = "https://github.com/google/googletest/archive/refs/heads/main.zip",
-            .hash = "122098d850ec2ed23b11c196d9a3d8f16d7617cf5a0ee47379399334fbcfb8d9d913",
+            .url = "https://github.com/anishsinha-io/googletest/archive/refs/heads/main.zip",
+            .hash = "1220d63efe66cb02b52382fffbeb884fc7585acdf1f5ce20e74e0717e30142bb643d",
         },
     },
 
