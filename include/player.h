@@ -14,15 +14,13 @@ public:
            const rl::Vector2& velocity);
 
     void Draw() override;
+    void Draw(float scale);
+    void Draw(float scale, rl::Vector2 position);
 
     void Move(Direction direction) override;
 
     friend auto operator<<(std::ostream& os,
-                           const Player& player) -> std::ostream& {
-        os << "Player position: " << player.position_.x << ", "
-           << player.position_.y << std::endl;
-        return os;
-    }
+                           const Player& player) -> std::ostream&;
 
 private:
     unsigned    animation_fps_ = 6;

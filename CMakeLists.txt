@@ -53,8 +53,12 @@ FetchContent_MakeAvailable(googletest)
 
 # Our Project
 
-set(SRCS
-    src/game.cc src/player.cc
+set(
+    SRCS
+
+    src/game.cc
+    src/player.cc
+    src/gameobject.cc
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/include)

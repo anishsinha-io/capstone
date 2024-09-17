@@ -5,6 +5,9 @@
 
 namespace game {
 
+#define DEFAULT_SCREEN_WIDTH 1200
+#define DEFAULT_SCREEN_HEIGHT 675
+
 namespace fs = std::filesystem;
 namespace rl = raylib;
 
@@ -15,6 +18,7 @@ public:
     ~Game() {}
 
     void Run();
+    void HandleResize();
     void HandleKeyboardEvents();
 
 private:
@@ -26,6 +30,7 @@ private:
     unsigned int screen_height_;
     std::string  title_ = "Roguelike";
     rl::Window   window_;
+    float        scale_ = 1.0F;
 };
 
 rl::Texture LoadTexture(const fs::path& texture_path);

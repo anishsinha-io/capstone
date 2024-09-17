@@ -22,6 +22,7 @@ pub fn build(b: *std.Build) void {
             "main.cc",
             "src/game.cc",
             "src/player.cc",
+            "src/gameobject.cc",
         },
     });
     exe.linkLibC();

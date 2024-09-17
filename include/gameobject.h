@@ -8,12 +8,11 @@ namespace rl = raylib;
 
 class GameObject {
 public:
-    GameObject(const rl::Vector2& position) : position_{position} {}
-    GameObject(float x, float y) : position_{x, y} {}
+    GameObject(const rl::Vector2& position);
+    GameObject(float x, float y);
     virtual ~GameObject() = default;
 
-    virtual void       Draw() = 0;
-    const rl::Vector2& GetPosition() const { return position_; }
+    virtual void Draw() = 0;
 
 protected:
     rl::Vector2 position_;
@@ -39,7 +38,3 @@ public:
 };
 
 }  // namespace game
-//
-//
-//
-//

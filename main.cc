@@ -1,5 +1,3 @@
-#include <raylib-cpp.hpp>
-
 #include "game.h"
 
 int main(int argc, char** argv) {

@@ -1,4 +1,3 @@
-
 #include "player.h"
 
 namespace game {
@@ -24,7 +23,15 @@ void Player::Move(Direction direction) {
     }
 }
 
-void Player::Draw() {
+auto operator<<(std::ostream& os, const Player& player) -> std::ostream& {
+    os << "Player position: " << player.position_.x << ", "
+       << player.position_.y << std::endl;
+    return os;
+}
+
+void Player::Draw() { Draw(0.0F); }
+
+void Player::Draw(float scale) {
     static rl::Rectangle frame_rec = {
         position_.x, position_.y, static_cast<float>(texture_.GetWidth()) / 6,
         static_cast<float>(texture_.GetHeight())};
@@ -39,6 +46,7 @@ void Player::Draw() {
             frame_rec.x = position_.x;
         }
     }
+
     rl::Rectangle rec = {position_.x, position_.y,
                          static_cast<float>(texture_.GetWidth()),
                          static_cast<float>(texture_.GetHeight())};
@@ -46,10 +54,20 @@ void Player::Draw() {
     float x = (static_cast<int>(frame_rec.x) + 127) & ~127;
     float y = (static_cast<int>(frame_rec.y) + 127) & ~127;
 
-    rl::Rectangle draw_rec = {x, y, static_cast<float>(texture_.GetWidth()) / 6,
+    rl::Rectangle source_rec = {x, y,
+                                static_cast<float>(texture_.GetWidth()) / 6,
+                                static_cast<float>(texture_.GetHeight())};
+
+    rl::Rectangle dest_rec = {position_.x, position_.y,
+                              static_cast<float>(texture_.GetWidth()) / 6,
                               static_cast<float>(texture_.GetHeight())};
 
-    texture_.Draw(draw_rec, position_);
+    texture_.Draw(source_rec, dest_rec, {0, 0});
+}
+
+void Player::Draw(float scale, rl::Vector2 position) {
+    position_ = position;
+    Draw(scale);
 }
 
 }  // namespace game
