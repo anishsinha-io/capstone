@@ -8,7 +8,7 @@ namespace game {
 
 namespace rl = raylib;
 
-class Player : Moveable, Textured {
+class Player : public Moveable, public Textured {
 public:
     Player(const rl::Vector2& position, rl::Texture&& texture,
            const rl::Vector2& velocity);
@@ -16,6 +16,7 @@ public:
     void Draw() override;
     void Draw(float scale);
     void Draw(float scale, rl::Vector2 position);
+    void Update() override;
 
     void Move(Direction direction) override;
 

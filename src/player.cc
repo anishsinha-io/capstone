@@ -58,9 +58,10 @@ void Player::Draw(float scale) {
                                 static_cast<float>(texture_.GetWidth()) / 6,
                                 static_cast<float>(texture_.GetHeight())};
 
-    rl::Rectangle dest_rec = {position_.x, position_.y,
-                              static_cast<float>(texture_.GetWidth()) / 6,
-                              static_cast<float>(texture_.GetHeight())};
+    float width = scale * static_cast<float>(texture_.GetWidth()) / 6;
+    float height = scale * static_cast<float>(texture_.GetHeight());
+
+    rl::Rectangle dest_rec = {position_.x, position_.y, width, height};
 
     texture_.Draw(source_rec, dest_rec, {0, 0});
 }
@@ -69,5 +70,7 @@ void Player::Draw(float scale, rl::Vector2 position) {
     position_ = position;
     Draw(scale);
 }
+
+void Player::Update() {}
 
 }  // namespace game

@@ -2,6 +2,11 @@
 
 #include <filesystem>
 #include <raylib-cpp.hpp>
+#include <vector>
+
+#include "colors.h"
+#include "gameobject.h"
+#include "player.h"
 
 namespace game {
 
@@ -24,13 +29,15 @@ public:
 private:
     static inline fs::path resource_path_ =
         fs::current_path().append("resources");
-    unsigned int level_ = 1;
-    unsigned int target_fps_ = 60;
-    unsigned int screen_width_;
-    unsigned int screen_height_;
-    std::string  title_ = "Roguelike";
-    rl::Window   window_;
-    float        scale_ = 1.0F;
+    unsigned int                             level_ = 1;
+    unsigned int                             target_fps_ = 60;
+    unsigned int                             screen_width_;
+    unsigned int                             screen_height_;
+    std::string                              title_ = "Roguelike";
+    rl::Window                               window_;
+    float                                    scale_ = 1.0F;
+    std::unique_ptr<Player>                  player_;
+    std::vector<std::unique_ptr<GameObject>> game_objects_;
 };
 
 rl::Texture LoadTexture(const fs::path& texture_path);

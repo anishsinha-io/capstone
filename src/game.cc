@@ -23,32 +23,26 @@ void Game::Run() {
 
     rl::Texture player_texture = rl::Texture(player_texture_path);
 
-    Player player(rl::Vector2(static_cast<float>(screen_width_) / 2 - 64,
-                              static_cast<float>(screen_height_) / 2 - 64),
+    Player player(rl::Vector2(static_cast<float>(screen_width_) / 5,
+                              static_cast<float>(screen_height_) / 5),
                   std::move(player_texture), rl::Vector2{10, 10});
+
+    player_ = std::make_unique<Player>(std::move(player));
 
     std::string test_background_texture_path =
         (resource_path_ / "sprites" / "test-background.png").generic_string();
 
     rl::Texture background_texture = rl::Texture(test_background_texture_path);
 
-    std::cout << scale_ << std::endl;
-
     while (!window_.ShouldClose()) {
         if (window_.IsResized()) {
             HandleResize();
-            std::cout << "screen width: " << window_.GetWidth()
-                      << " screen height: " << window_.GetHeight() << std::endl;
-
-            std::cout << scale_ << std::endl;
-
-            // player_.position_ = rl::Vector2(
-            //     static_cast<float>(window_.GetWidth()) / 2,
-            //     static_cast<float>(window_.GetHeight()) / 2);
+            // player_->SetPosition(static_cast<float>(screen_width_) / 2 - 64,
+            //                      static_cast<float>(screen_height_) / 2 -
+            //                      64);
         }
-        window_.BeginDrawing();
 
-        window_.ClearBackground(rl::Color::RayWhite());
+        HandleKeyboardEvents();
 
         rl::Rectangle source_rec = {
             0.0F, 0.0F, static_cast<float>(background_texture.GetWidth()),
@@ -65,31 +59,37 @@ void Game::Run() {
                                   static_cast<float>(window_.GetHeight())};
 
         if (ratio > 16.0F / 9.0F) {
-            // we will have black bars on the left and right
-            //
             float width =
                 static_cast<float>(window_.GetHeight()) * (16.0F / 9.0F);
 
             dest_rec.x = (window_.GetWidth() - width) / 2;
             dest_rec.y = 0.0F;
             dest_rec.width = width;
+
+            player_->SetPositionX(dest_rec.x + dest_rec.width / 6);
+            player_->SetPositionY(dest_rec.y + dest_rec.height * 3 / 5);
+
         } else {
-            // we will have black bars on the top and bottom
-            //
             float height =
                 static_cast<float>(window_.GetWidth()) * (9.0F / 16.0F);
 
             dest_rec.x = 0.0F;
             dest_rec.y = (window_.GetHeight() - height) / 2;
             dest_rec.height = height;
+
+            player_->SetPositionX(dest_rec.x + dest_rec.width / 6);
+            player_->SetPositionY(dest_rec.y + dest_rec.height * 7 / 10);
         }
 
-        background_texture.Draw(source_rec, dest_rec);
-        rl::Vector2 player_position{
-            static_cast<float>(screen_width_) / 2 - 64,
-            static_cast<float>(screen_height_) / 2 - 64};
+        window_.BeginDrawing();
 
-        player.Draw(scale_, player_position);
+        window_.ClearBackground(SPACE);
+
+        background_texture.Draw(source_rec, dest_rec);
+
+        player_->Draw(scale_);
+
+        dest_rec.DrawLines(rl::Color::RayWhite(), 2.0F);
 
         window_.EndDrawing();
     }
@@ -113,9 +113,11 @@ void Game::HandleKeyboardEvents() {
     switch (key) {
         // Move player left
         case KEY_A:
+            player_->Move(Player::Direction::kLeft);
             break;
         // Move player right
         case KEY_D:
+            player_->Move(Player::Direction::kRight);
             break;
         // Inventory
         case KEY_E:
