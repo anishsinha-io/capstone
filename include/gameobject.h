@@ -6,6 +6,12 @@ namespace game {
 
 namespace rl = raylib;
 
+/**
+ * @class GameObject
+ * @brief A drawable and updatable game object. Base class for everything in the
+ * game.
+ *
+ */
 class GameObject {
 public:
     GameObject(const rl::Vector2& position);
@@ -31,6 +37,11 @@ protected:
     rl::Vector2 position_;
 };
 
+/**
+ * @class Textured
+ * @brief A textured game object.
+ *
+ */
 class Textured : virtual public GameObject {
 public:
     Textured(rl::Texture&& texture) : texture_{std::move(texture)} {}
@@ -41,6 +52,11 @@ protected:
     rl::Texture texture_;
 };
 
+/**
+ * @class Moveable
+ * @brief A moveable game object.
+ *
+ */
 class Moveable : virtual public GameObject {
 public:
     Moveable() = default;

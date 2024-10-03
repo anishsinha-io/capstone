@@ -16,6 +16,11 @@ namespace game {
 namespace fs = std::filesystem;
 namespace rl = raylib;
 
+/**
+ * @class Game
+ * @brief The main game class. Contains the game loop and all game objects.
+ *
+ */
 class Game {
 public:
     enum class CameraMode { kDynamic, kFixed };
@@ -24,21 +29,21 @@ public:
          const std::string& title, unsigned int target_fps) noexcept;
     ~Game() {}
 
-    void        Run();
+    void Run();
+
+private:
     void        HandleResize();
     void        HandleKeyboardEvents();
     inline void SetBgSourceRec(const rl::Rectangle& bg_source_rec) {
         bg_source_rec_ = bg_source_rec;
     }
-
     inline void SetBgDestRec(const rl::Rectangle& bg_dest_rec) {
         bg_dest_rec_ = bg_dest_rec;
     }
-
     inline rl::Rectangle GetBgSourceRec() const { return bg_source_rec_; }
     inline rl::Rectangle GetBgDestRec() const { return bg_dest_rec_; }
+    void                 CorrectPlayerPosition();
 
-private:
     static inline fs::path resource_path_ =
         fs::current_path().append("resources");
     unsigned int                             level_ = 1;
@@ -50,8 +55,7 @@ private:
     float                                    scale_ = 1.0F;
     std::unique_ptr<Player>                  player_;
     std::vector<std::unique_ptr<GameObject>> game_objects_;
-    rl::Camera2D                             camera_ = {};
-    CameraMode    camera_mode_ = CameraMode::kDynamic;
+    Camera                                   camera_;
     rl::Rectangle bg_source_rec_ = {0.0F, 0.0F, 1600.0f, 900.0f};
     rl::Rectangle bg_dest_rec_ = {0.0F, 0.0F,
                                   static_cast<float>(window_.GetWidth()),

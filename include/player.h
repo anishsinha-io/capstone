@@ -8,6 +8,11 @@ namespace game {
 
 namespace rl = raylib;
 
+/**
+ * @class Player
+ * @brief The player character. Has special treatment in the game loop.
+ *
+ */
 class Player : public Moveable, public Textured {
 public:
     Player(const rl::Vector2& position, rl::Texture&& texture,
