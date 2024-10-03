@@ -6,22 +6,24 @@ Player::Player(const rl::Vector2& position, rl::Texture&& texture,
                const rl::Vector2& velocity)
     : Textured(std::move(texture)), GameObject(position) {}
 
-void Player::Move(Direction direction) {
+void Player::Move(Direction direction, float amount) {
     switch (direction) {
         case Direction::kUp:
-            position_.y -= velocity_.y;
+            position_.y -= amount;
             break;
         case Direction::kDown:
-            position_.y += velocity_.y;
+            position_.y += amount;
             break;
         case Direction::kLeft:
-            position_.x -= velocity_.x;
+            position_.x -= amount;
             break;
         case Direction::kRight:
-            position_.x += velocity_.x;
+            position_.x += amount;
             break;
     }
 }
+
+void Player::Move(Direction direction) { Move(direction, 10.0F); }
 
 auto operator<<(std::ostream& os, const Player& player) -> std::ostream& {
     os << "Player position: " << player.position_.x << ", "

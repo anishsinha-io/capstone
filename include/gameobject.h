@@ -19,6 +19,10 @@ public:
     inline void SetPosition(const rl::Vector2& position) {
         position_ = position;
     }
+
+    inline auto GetPositionX() const -> float { return position_.x; }
+    inline auto GetPositionY() const -> float { return position_.y; }
+
     inline void SetPosition(float x, float y) { position_ = rl::Vector2{x, y}; }
     inline void SetPositionX(float x) { position_.x = x; }
     inline void SetPositionY(float y) { position_.y = y; }

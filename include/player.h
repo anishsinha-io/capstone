@@ -19,6 +19,7 @@ public:
     void Update() override;
 
     void Move(Direction direction) override;
+    void Move(Direction direction, float amount);
 
     friend auto operator<<(std::ostream& os,
                            const Player& player) -> std::ostream&;
