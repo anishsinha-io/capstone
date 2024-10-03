@@ -4,6 +4,7 @@
 #include <raylib-cpp.hpp>
 #include <vector>
 
+#include "camera.h"
 #include "gameobject.h"
 #include "player.h"
 
