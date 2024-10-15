@@ -59,7 +59,7 @@ set(
     src/game.cc
     src/player.cc
     src/gameobject.cc
-    src/events.cc
+    src/platforms.cc
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
