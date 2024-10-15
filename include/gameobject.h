@@ -15,6 +15,7 @@ namespace rl = raylib;
 class GameObject {
 public:
     GameObject(const rl::Vector2& position);
+    GameObject(const rl::Vector2& position, float scale);
     GameObject(float x, float y);
     virtual ~GameObject() = default;
 
@@ -35,6 +36,7 @@ public:
 
 protected:
     rl::Vector2 position_;
+    float       scale_{1.0f};
 };
 
 /**
@@ -64,6 +66,9 @@ public:
     enum class Direction { kUp, kDown, kLeft, kRight };
 
     virtual void Move(Direction direction) = 0;
+
+protected:
+    rl::Vector2 velocity_{0, 0};
 };
 
 }  // namespace game
